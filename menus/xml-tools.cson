@@ -5,10 +5,6 @@
       'label': 'XML Tools'
       'submenu': [
           {
-            'label': 'Toggle'
-            'command': 'xml-tools:toggle'
-          },
-          {
               'label': 'Unformat (Linearize)'
               'command': 'xml-tools:unformat'
           },
@@ -25,10 +21,6 @@
     'submenu': [
       'label': 'XML Tools'
       'submenu': [
-        {
-          'label': 'Toggle'
-          'command': 'xml-tools:toggle'
-        },
         {
             'label': 'Unformat (Linearize)'
             'command': 'xml-tools:unformat'
