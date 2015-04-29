@@ -1,0 +1,13 @@
+{
+  "name": "XML Tools",
+  "main": "./lib/xml-tools",
+  "version": "0.1.0",
+  "description": "A collection of essential XML utilities.",
+  "repository": "https://github.com/HiddenTemple/xml-tools",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=0.174.0 <2.0.0"
+  },
+  "dependencies": {
+  }
+}

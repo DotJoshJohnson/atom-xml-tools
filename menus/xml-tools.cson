@@ -1,0 +1,43 @@
+# See https://atom.io/docs/latest/hacking-atom-package-word-count#menus for more details
+'context-menu':
+  'atom-text-editor': [
+    {
+      'label': 'XML Tools'
+      'submenu': [
+          {
+            'label': 'Toggle'
+            'command': 'xml-tools:toggle'
+          },
+          {
+              'label': 'Unformat (Linearize)'
+              'command': 'xml-tools:unformat'
+          },
+          {
+              'label': 'Format (Indent)'
+              'command': 'xml-tools:format'
+          }
+      ]
+    }
+  ]
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'XML Tools'
+      'submenu': [
+        {
+          'label': 'Toggle'
+          'command': 'xml-tools:toggle'
+        },
+        {
+            'label': 'Unformat (Linearize)'
+            'command': 'xml-tools:unformat'
+        },
+        {
+            'label': 'Format (Indent)'
+            'command': 'xml-tools:format'
+        }
+      ]
+    ]
+  }
+]
