@@ -32,4 +32,7 @@ module.exports =
                     level--
                     formattedXml += ' '.repeat(tablength).repeat(level) + element + '\r\n'
 
+                else
+                    formattedXml += ' '.repeat(tablength).repeat(level) + element + '\r\n'
+
             return formattedXml
