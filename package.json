@@ -1,7 +1,7 @@
 {
   "name": "xml-tools",
   "main": "./lib/xml-tools",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "A collection of essential XML utilities.",
   "repository": "https://github.com/HiddenTemple/atom-xml-tools",
   "license": "MIT",
