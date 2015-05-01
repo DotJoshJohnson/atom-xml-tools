@@ -1,38 +1,48 @@
-REGX_XML_TAG_OPEN = new RegExp('<(?!!)[^/>]+/?>')
-REGX_XML_TAG_CLOSE = new RegExp('<\s*/\s*[^>]+>')
-REGX_XML_TAG_COMPLETE = new RegExp('<\s*\s*[^>]+>.*<\s*/\s*[^>]+>|<[^>]+/>')
-REGX_XML_ISPACE = new RegExp('(?:>)[\r\n\t ]*(?:<)', 'g')
+REGX_XML_ISPACE = />[\r\n\s]*</g
+REGX_XML_NSPACE = /></g
+REGX_XML_ELEMENT_START = /<\w[\w\d]*[^>]*[^\/]>/
+REGX_XML_ELEMENT_END = /<\s*\/\s*\w[\w\d]*>/
 
 module.exports =
     class XmlFormatter
         constructor: ->
 
         unformat: (xmlString) ->
-            xmlString = xmlString.replace(REGX_XML_ISPACE, '><')
-            return xmlString
+            unformattedXml = xmlString.replace(REGX_XML_ISPACE, '><')
+            return unformattedXml
 
         format: (xmlString) ->
-            tablength = atom.config.get('editor.tabLength')
-
-            xmlString = @unformat(xmlString)
-            xmlString = xmlString.replace(/></g, '>\r\n<')
-
+            br = atom.config.get('xml-tools.br') ? '\r\n'
+            tab = ' '.repeat((atom.config.get('editor.tabLength') ? 4))
             level = 0
+
+            unformattedXml = @unformat xmlString
+            tokenizedXml = unformattedXml.replace REGX_XML_NSPACE, ">#{ br }<"
             formattedXml = ''
 
-            for element in xmlString.split('\r\n')
-                if element.match(REGX_XML_TAG_COMPLETE)
-                    formattedXml += ' '.repeat(tablength).repeat(level) + element + '\r\n'
+            for element in tokenizedXml.split br
+                if element.trim() == ''
+                    continue
 
-                else if element.match(REGX_XML_TAG_OPEN)
-                    formattedXml += ' '.repeat(tablength).repeat(level) + element + '\r\n'
+                start = REGX_XML_ELEMENT_START.exec element
+
+                if start == null
+                    start = ['']
+
+                end = REGX_XML_ELEMENT_END.exec element
+
+                if end == null
+                    end = ['']
+
+                if element == start[0]
+                    formattedXml += tab.repeat(level) + element + br
                     level++
 
-                else if element.match(REGX_XML_TAG_CLOSE)
+                else if element == end[0]
                     level--
-                    formattedXml += ' '.repeat(tablength).repeat(level) + element + '\r\n'
+                    formattedXml += tab.repeat(level) + element + br
 
                 else
-                    formattedXml += ' '.repeat(tablength).repeat(level) + element + '\r\n'
+                    formattedXml += tab.repeat(level) + element + br
 
             return formattedXml
