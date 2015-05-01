@@ -5,11 +5,14 @@ REGX_XML_ISPACE = new RegExp('(?:>)[\r\n\t ]*(?:<)', 'g')
 
 {CompositeDisposable} = require 'atom'
 XmlFormatter = require './xml-formatter'
+XPathEngine = require './xpath-engine'
+XPathView = require './views/xpath-view'
 Utils = require './utils'
 
 module.exports = XmlTools =
     subscriptions: null
     xmlFormatter: null
+    prompt: null
 
     activate: (state) ->
         # set up required services and utilities
@@ -21,6 +24,7 @@ module.exports = XmlTools =
         # Register command that toggles this view
         @subscriptions.add atom.commands.add 'atom-workspace', 'xml-tools:unformat': => @unformat()
         @subscriptions.add atom.commands.add 'atom-workspace', 'xml-tools:format': => @format()
+        @subscriptions.add atom.commands.add 'atom-workspace', 'xml-tools:query-document': => @queryDocument()
 
     deactivate: ->
         @subscriptions.dispose()
@@ -42,3 +46,8 @@ module.exports = XmlTools =
                 text = editor.getText()
                 text = @xmlFormatter.format(text)
                 editor.setText(text)
+
+    queryDocument: ->
+        if editor = atom.workspace.getActiveTextEditor()
+            view = new XPathView(editor)
+            view.toggle()

@@ -10,3 +10,4 @@
 'atom-workspace':
     'ctrl-alt-x': 'xml-tools:format'
     'ctrl-alt-z': 'xml-tools:unformat'
+    'ctrl-alt-q': 'xml-tools:query-document'

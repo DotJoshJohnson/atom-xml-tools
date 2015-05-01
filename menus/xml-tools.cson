@@ -11,6 +11,10 @@
           {
               'label': 'Format (Indent)'
               'command': 'xml-tools:format'
+          },
+          {
+              'label': 'Query Document'
+              'command': 'xml-tools:query-document'
           }
       ]
     }
@@ -28,6 +32,10 @@
         {
             'label': 'Format (Indent)'
             'command': 'xml-tools:format'
+        },
+        {
+            'label': 'Query Document'
+            'command': 'xml-tools:query-document'
         }
       ]
     ]
